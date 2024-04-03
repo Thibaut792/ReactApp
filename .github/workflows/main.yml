@@ -1,0 +1,30 @@
+name: Hello World
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Vérifier l'âge
+        id: age_check
+        run: |
+          if [ $AGE -ge 18 ]; then
+            echo "::set-output name=result:: majeur"
+          else
+            echo "::set-output name=result:: mineur"
+          fi
+        env:
+          AGE: 21
+
+      - name: Hello Thibaut
+        run: echo "Hello, $NOM , tu es ${{ steps.age_check.outputs.result }}"
+        env:
+          NOM: Thibaut
