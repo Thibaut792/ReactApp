@@ -47,4 +47,4 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
           namespace: your-namespace
-          manifests: your-kubernetes-manifest.yaml
+          manifests: deploiementMyApp.yaml
