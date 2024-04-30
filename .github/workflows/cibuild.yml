@@ -46,5 +46,5 @@ jobs:
         uses: azure/k8s-deploy@v1
         with:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
-          namespace: your-namespace
-          manifests: deploiementMyApp.yaml
+          namespace: default
+          manifests: my-app/deployment/deploiementMyApp.yaml
