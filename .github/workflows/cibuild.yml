@@ -39,7 +39,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t your-username/your-image-name:latest .
+          docker build -t your-username/your-image-name:latest -f my-app/Dockerfile .
           docker push your-username/your-image-name:latest
 
       - name: Deploy to Kubernetes
