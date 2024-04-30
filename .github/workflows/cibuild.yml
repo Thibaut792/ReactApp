@@ -39,5 +39,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t thibaut792/test:latest -f my-app/Dockerfile .
+          APP_VERSION=$(node -pe "require('./my-app/package.json').version")
+
+          docker build -t thibaut792/test:$APP_VERSION -t thibaut792/test:latest -f my-app/Dockerfile .
+
+          docker push thibaut792/test:$APP_VERSION
           docker push thibaut792/test:latest
