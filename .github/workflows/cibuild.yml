@@ -39,8 +39,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t your-username/your-image-name:latest -f my-app/Dockerfile .
-          docker push your-username/your-image-name:latest
+          docker build -t thibaut792/test:latest -f my-app/Dockerfile .
+          docker push thibaut792/test:latest
 
       - name: Deploy to Kubernetes
         uses: azure/k8s-deploy@v1
