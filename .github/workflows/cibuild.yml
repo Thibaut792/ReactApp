@@ -37,10 +37,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Get Git SHA
+        id: git_sha
+        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+
       - name: Build Docker image
         run: |
-          GIT_SHA=$(git rev-parse HEAD | cut -c1-8)
+          docker build -t thibaut792/test:${{ steps.git_sha.outputs.sha }} -t thibaut792/test:latest -f my-app/Dockerfile .
+          docker push thibaut792/test:${{ steps.git_sha.outputs.sha }}
 
-          docker build -t thibaut792/test:$GIT_SHA -t thibaut792/test:latest -f my-app/Dockerfile .
-
-          docker push thibaut792/test:$GIT_SHA
+      - name: Update Kubernetes manifest
+        run: |
+          sed -i 's|image: thibaut792/test:latest|image: thibaut792/test:${{ steps.git_sha.outputs.sha }}|' ../deployement/deploiementMyApp.yaml
