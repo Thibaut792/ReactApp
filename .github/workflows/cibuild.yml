@@ -27,7 +27,7 @@ jobs:
         working-directory: my-app
         run: npm install
 
-      - name: Build React app
+      - name: Build React App
         working-directory: my-app
         run: npm run build
 
