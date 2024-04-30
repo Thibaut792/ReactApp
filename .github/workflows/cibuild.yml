@@ -49,8 +49,13 @@ jobs:
           docker push thibaut792/test:$GIT_SHA
           docker push thibaut792/test:latest
 
+      - name: Navigate to project directory
+        run: |
+          cd ../deployement
+          ls -la
+
       - name: Update Kubernetes manifest with image tag
         run: |
           SHA="${{ steps.git_sha.outputs.sha }}"
-          sed -i "s|thibaut792/test:latest|thibaut792/test:$SHA|g" ../deployement/deploimentMyApp.yaml
+          sed -i "s|thibaut792/test:latest|thibaut792/test:$SHA|g" deploimentMyApp.yaml
         working-directory: my-app
