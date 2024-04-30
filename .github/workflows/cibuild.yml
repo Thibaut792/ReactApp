@@ -44,15 +44,7 @@ jobs:
       - name: Build Docker image
         run: |
           GIT_SHA=$(git rev-parse HEAD | cut -c1-8)
-          docker build -t thibaut792/test:$GIT_SHA -t -f my-app/Dockerfile . 
+          docker build -t thibaut792/test:$GIT_SHA -t thibaut792/test:latest -f my-app/Dockerfile .
 
           docker push thibaut792/test:$GIT_SHA
-
-      - name: Navigate to project directory
-        run: |
-          cd deployement
-          ls -la
-
-      - name: Replace SHA in deployment.yaml
-        run: |
-          sed -i "s/{{SHA_PLACEHOLDER}}/${{ steps.git_sha.outputs.sha }}/g" deploiementMyApp.yml
+          docker push thibaut792/test:latest
