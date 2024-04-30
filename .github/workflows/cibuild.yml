@@ -43,9 +43,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t thibaut792/test:${{ steps.git_sha.outputs.sha }} -t thibaut792/test:latest -f my-app/Dockerfile .
-          docker push thibaut792/test:${{ steps.git_sha.outputs.sha }}
+          GIT_SHA=$(git rev-parse HEAD | cut -c1-8)
+          docker build -t thibaut792/test:$GIT_SHA -t thibaut792/test:latest -f my-app/Dockerfile .
 
-      - name: Update Kubernetes manifest
-        run: |
-          sed -i 's|image: thibaut792/test:latest|image: thibaut792/test:${{ steps.git_sha.outputs.sha }}|' ../deployement/deploiementMyApp.yaml
+          docker push thibaut792/test:$GIT_SHA
