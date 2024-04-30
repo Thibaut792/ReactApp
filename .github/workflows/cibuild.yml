@@ -43,10 +43,22 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t thibaut792/test:${{ gitub.sha }} -t thibaut792/test:latest -f my-app/Dockerfile .
+          GIT_SHA=$(git rev-parse HEAD | cut -c1-8)
+          docker build -t thibaut792/test:$GIT_SHA -t thibaut792/test:latest -f my-app/Dockerfile .
 
-          docker push thibaut792/test:${{ gitub.sha }}
+          docker push thibaut792/test:$GIT_SHA
           docker push thibaut792/test:latest
+
+      # - name: Navigate to project directory
+      #   run: |
+      #     cd ../deployement
+      #     ls -la
+
+      # - name: Update Kubernetes manifest with image tag
+      #   run: |
+      #     SHA="${{ steps.git_sha.outputs.sha }}"
+      #     sed -i "s|thibaut792/test:latest|thibaut792/test:$SHA|g" deploimentMyApp.yaml
+      #   working-directory: my-app
 
       - name: Checkout code for the update
         uses: actions/checkout@v3
