@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: thibaut792/test:latest
+          image: thibaut792/test:{{SHA_PLACEHOLDER}}
           ports:
             - containerPort: 3000
 ---
