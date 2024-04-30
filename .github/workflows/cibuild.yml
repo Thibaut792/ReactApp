@@ -39,9 +39,9 @@ jobs:
 
       - name: Build Docker image
         run: |
-          APP_VERSION=$(node -pe "require('./my-app/package.json').version")
+          GIT_SHA=$(git rev-parse HEAD | cut -c1-8)
 
-          docker build -t thibaut792/test:$APP_VERSION -t thibaut792/test:latest -f my-app/Dockerfile .
+          docker build -t thibaut792/test:$GIT_SHA -t thibaut792/test:latest -f my-app/Dockerfile .
 
-          docker push thibaut792/test:$APP_VERSION
+          docker push thibaut792/test:$GIT_SHA
           docker push thibaut792/test:latest
