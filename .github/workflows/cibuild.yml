@@ -54,6 +54,11 @@ jobs:
         with:
           ref: main
 
+      - name: Navigate to project directory
+        run: |
+          cd ../deployement
+          ls -la
+
       - name: Update deployment manifest
         run: |
           SHA=$(echo "${{ steps.git_sha.outputs.sha }}")
