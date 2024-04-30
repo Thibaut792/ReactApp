@@ -54,13 +54,7 @@ jobs:
         with:
           ref: main
 
-      - name: Navigate to project directory
-        run: |
-          cd ..
-          cd .\deployement\
-          ls -la
-
       - name: Update deployment manifest
         run: |
           SHA=$(echo "${{ steps.git_sha.outputs.sha }}")
-          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployment/deploiementMyApp.yaml
+          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deploiementMyApp.yaml
