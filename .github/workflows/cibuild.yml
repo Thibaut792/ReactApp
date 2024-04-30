@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "20"
       - name: Navigate to project directory
-        run: ls
+        run: cd my-app
         # run: cd ../../my-app/
 
       - name: Install dependencies
