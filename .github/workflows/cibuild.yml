@@ -57,7 +57,7 @@ jobs:
       - name: Navigate to project directory
         run: |
           cd ..
-          cd deployement
+          cd .\deployement\
           ls -la
 
       - name: Update deployment manifest
