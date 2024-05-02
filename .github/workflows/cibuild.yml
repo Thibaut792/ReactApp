@@ -54,15 +54,13 @@ jobs:
         with:
           ref: main
 
-      # - name: Update deployment manifest
-      #   run: |
-      #     SHA=$(echo "${{ steps.git_sha.outputs.sha }}")
-      #     sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployement/deploiementMyApp.yml
+      - name: Update deployment manifest
+        run: |
+          SHA=$(echo "${{ steps.git_sha.outputs.sha }}")
+          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployement/deploiementMyApp.yml
 
-      # - name: Commit changes to deployment manifest
-      #   run: |
-      #     git config --global user.email "you@example.com"
-      #     git config --global user.name "Your Name"
-      #     git add deployement/deploiementMyApp.yaml
-      #     git commit -m "Update deployment manifest with latest image SHA"
-      #     git push
+      - name: Commit changes to deployment manifest
+        run: |
+          git add .
+          git commit -m "Update deployment manifest with latest image SHA"
+          git push
