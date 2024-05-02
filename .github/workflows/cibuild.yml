@@ -56,13 +56,8 @@ jobs:
 
       - name: Update deployment manifest
         run: |
-          SHA=$(git rev-parse HEAD | cut -c1-8)
+          SHA="${{ steps.git_sha.outputs.sha }}"
           sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployement/deploiementMyApp.yml
-
-      - name: Checkout code for the update
-        uses: actions/checkout@v3
-        with:
-          ref: main
 
       - name: Display updated deployment manifest
         run: cat deployement/deploiementMyApp.yml
