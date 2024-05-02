@@ -59,6 +59,9 @@ jobs:
           SHA="${{ steps.git_sha.outputs.sha }}"
           sed -i "s|thibaut792/test:latest|thibaut792/test:$SHA|g" deployement/deploiementMyApp.yml
 
+      - name: Display updated deployment manifest
+        run: cat deployment/deploiementMyApp.yml
+
       - name: Commit changes to deployment a manifest
         run: |
           git config --global user.email "thibautfiquet7@gmail.com"
