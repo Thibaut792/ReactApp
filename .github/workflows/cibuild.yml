@@ -57,7 +57,7 @@ jobs:
       - name: Update deployment manifest
         run: |
           SHA="${{ steps.git_sha.outputs.sha }}"
-          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/g" deployment/deploiementMyApp.yml
+          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/g" deployement/deploiementMyApp.yml
 
       - name: Commit changes to deployment a manifest
         run: |
