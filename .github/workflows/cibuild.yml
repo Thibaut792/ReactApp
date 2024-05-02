@@ -39,7 +39,7 @@ jobs:
 
       - name: Get Git SHA
         id: git_sha
-        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+        run: echo "::set-output name=sha::$(git rev-parse --short=8 HEAD)"
 
       - name: Build Docker image
         run: |
@@ -54,18 +54,18 @@ jobs:
         with:
           ref: main
 
-      # - name: Update deployment manifest
-      #   run: |
-      #     SHA="${{ steps.git_sha.outputs.sha }}"
-      #     sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployement/deploiementMyApp.yml
+      - name: Update deployment manifest
+        run: |
+          SHA="${{ steps.git_sha.outputs.sha }}"
+          sed -i "s/image: thibaut792\/test:[0-9a-f]\{8\}/image: thibaut792\/test:$SHA/" deployement/deploiementMyApp.yml
 
       - name: Display updated deployment manifest
         run: cat deployement/deploiementMyApp.yml
 
-      # - name: Commit changes to deployment a manifest
-      #   run: |
-      #     git config --global user.email "thibautfiquet7@gmail.com"
-      #     git config --global user.name "Thibaut792"
-      #     git add .
-      #     git commit -m "Update deployment manifest with latest image SHA"
-      #     git push
+      - name: Commit changes to deployment a manifest
+        run: |
+          git config --global user.email "thibautfiquet7@gmail.com"
+          git config --global user.name "Thibaut792"
+          git add .
+          git commit -m "Update deployment manifest with latest image SHA"
+          git push
