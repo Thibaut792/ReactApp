@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: thibaut792/test:095d6a51
+          image: thibaut792/test:02fc40f
           ports:
             - containerPort: 3000
