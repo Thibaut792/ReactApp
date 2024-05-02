@@ -57,7 +57,7 @@ jobs:
       - name: Update deployment manifest
         run: |
           SHA="${{ steps.git_sha.outputs.sha }}"
-          sed -i "s|thibaut792/test:latest|thibaut792/test:$SHA|g" deployement/deploiementMyApp.yml
+          sed -i "s#thibaut792/test:latest#thibaut792/test:$SHA#g" deployement/deploiementMyApp.yml
 
       - name: Checkout code for the update
         uses: actions/checkout@v3
