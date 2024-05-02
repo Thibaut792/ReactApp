@@ -61,6 +61,8 @@ jobs:
 
       - name: Commit changes to deployment manifest
         run: |
+          git config --global user.email "thibautfiquet7@gmail.com"
+          git config --global user.name "Thibaut792"
           git add .
           git commit -m "Update deployment manifest with latest image SHA"
           git push
